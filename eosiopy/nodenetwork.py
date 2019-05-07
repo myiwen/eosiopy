@@ -1,6 +1,15 @@
+import json
 import requests
 
 from eosiopy.config import eosio_config
+
+
+def requests_post(url, json_data):
+    headers = {
+        'Content-Type': 'application/json',
+    }
+    data = json.dumps(json_data, ensure_ascii=False)
+    return requests.post(url, data=data, headers=headers)
 
 
 class NodeNetwork(object):
@@ -11,7 +20,7 @@ class NodeNetwork(object):
 
     @staticmethod
     def node_post_base(url, json_data):
-        res = requests.post(eosio_config.url_port + url, json_data=json_data)
+        res = requests_post(eosio_config.url_port + url, json_data=json_data)
         return res.json()
 
     @staticmethod
@@ -28,25 +37,25 @@ class NodeNetwork(object):
 
     @staticmethod
     def push_transaction(json_data):
-        res = requests.post(eosio_config.url_port + eosio_config.push_transaction, json=json_data)
+        res = requests_post(eosio_config.url_port + eosio_config.push_transaction, json_data=json_data)
         return res.json()
 
     @staticmethod
     def json_to_abi(json_data):
-        res = requests.post(eosio_config.url_port + eosio_config.abi_json_to_bin, json=json_data)
+        res = requests_post(eosio_config.url_port + eosio_config.abi_json_to_bin, json_data=json_data)
         return res.json()
 
     @staticmethod
     def get_account(json_data):
-        res = requests.post(eosio_config.url_port + eosio_config.get_account, json=json_data)
+        res = requests_post(eosio_config.url_port + eosio_config.get_account, json_data=json_data)
         return res.json()
 
     @staticmethod
     def get_accounts(json_data):
-        res = requests.post(eosio_config.url_port + eosio_config.get_accounts, json=json_data)
+        res = requests_post(eosio_config.url_port + eosio_config.get_accounts, json_data=json_data)
         return res.json()
 
     @staticmethod
     def get_currency_balance(json_data):
-        res = requests.post(eosio_config.url_port + eosio_config.get_currency_balance, json=json_data)
+        res = requests_post(eosio_config.url_port + eosio_config.get_currency_balance, json_data=json_data)
         return res.json()
