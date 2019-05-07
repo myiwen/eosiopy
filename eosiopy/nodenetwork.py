@@ -8,7 +8,7 @@ def requests_post(url, json_data):
     headers = {
         'Content-Type': 'application/json',
     }
-    data = json.dumps(json_data, ensure_ascii=False)
+    data = json.dumps(json_data, ensure_ascii=False).encode('utf8')
     return requests.post(url, data=data, headers=headers)
 
 
